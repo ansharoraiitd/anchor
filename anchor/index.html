@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANCHOR — Your agent knows you. Anchor makes sure you still do.</title>
+  
+  <!-- CSS Stylesheets in order -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/screens.css">
+  <link rel="stylesheet" href="css/pmlens.css">
+</head>
+<body>
+
+<!-- Ambient Drifting Aurora Background Blobs + Grid -->
+<div class="ambient-aurora" aria-hidden="true">
+  <div class="aurora-blob-blue"></div>
+  <div class="aurora-blob-violet"></div>
+</div>
+
+<div id="app">
+  <!-- Desktop 390x844 Phone Wrapper (full screen on mobile) -->
+  <div id="phone-frame">
+    <!-- Top Bar -->
+    <header id="top-bar">
+      <div class="top-bar__logo" role="banner">
+        ANCHOR <span>· Meera Iyer</span>
+      </div>
+      <div class="top-bar__actions">
+        <div id="tour-mode-pill" class="tour-mode-pill" style="display:none;" aria-live="polite">
+          <span class="tour-pulse-dot"></span>
+          <span>TOUR MODE</span>
+        </div>
+        <button class="btn btn--sm btn--primary" id="tour-start-btn" title="Start Guided Tour (Shortcut: T)" aria-label="Start Guided Tour" style="padding: 4px 10px; font-size: 11px;">
+          Tour
+        </button>
+        <button class="top-bar__btn" id="menu-btn" aria-label="Open menu" aria-haspopup="true" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="1.5"></circle>
+            <circle cx="12" cy="5" r="1.5"></circle>
+            <circle cx="12" cy="19" r="1.5"></circle>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Top Right Menu Popup -->
+      <div class="menu-popup" id="top-menu" role="menu">
+        <button class="menu-item" id="menu-agentoff" role="menuitem">
+          <span>🌿</span> Agent-Off Day Challenge
+        </button>
+        <button class="menu-item" id="menu-take-tour" role="menuitem">
+          <span>🎬</span> Play Guided Tour
+        </button>
+        <div class="menu-divider"></div>
+        <button class="menu-item" id="menu-reset" role="menuitem" style="color:var(--drift-amber)">
+          <span>↺</span> Reset Demo Data
+        </button>
+        <div class="menu-divider"></div>
+        <button class="menu-item" id="menu-about" role="menuitem" style="font-size:11px;color:var(--text-mid)">
+          <span>ℹ</span> Flipkart APM 2040 Concept
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Screens Viewport -->
+    <main id="screen-container">
+      <section id="screen-home" class="screen" aria-label="Home Screen"></section>
+      <section id="screen-pause" class="screen" aria-label="Pause Moments"></section>
+      <section id="screen-mirror" class="screen" aria-label="Mirror Screen"></section>
+      <section id="screen-autonomy" class="screen" aria-label="Autonomy Dial"></section>
+      <section id="screen-ledger" class="screen" aria-label="Ledger"></section>
+      <section id="screen-agentoff" class="screen" aria-label="Agent-Off Day"></section>
+    </main>
+
+    <!-- Bottom Tab Navigation (5 Tabs) -->
+    <nav id="bottom-tab-bar" aria-label="Main Navigation">
+      <!-- Sliding Glow Indicator Pill -->
+      <div id="tab-indicator-pill" class="tab-indicator-pill"></div>
+
+      <button class="tab-item active" data-tab="home" role="tab" aria-selected="true" aria-label="Home Tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <span>Home</span>
+      </button>
+
+      <button class="tab-item" data-tab="pause" role="tab" aria-selected="false" aria-label="Pause Moments Tab">
+        <div class="tab-badge" style="display:none">0</div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="6" y="4" width="4" height="16"></rect>
+          <rect x="14" y="4" width="4" height="16"></rect>
+        </svg>
+        <span>Pause</span>
+      </button>
+
+      <button class="tab-item" data-tab="mirror" role="tab" aria-selected="false" aria-label="Mirror Tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10"></path>
+          <path d="M12 6a6 6 0 0 1 6 6c0 3.31-2.69 6-6 6"></path>
+        </svg>
+        <span>Mirror</span>
+      </button>
+
+      <button class="tab-item" data-tab="autonomy" role="tab" aria-selected="false" aria-label="Autonomy Dial Tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+        <span>Autonomy</span>
+      </button>
+
+      <button class="tab-item" data-tab="ledger" role="tab" aria-selected="false" aria-label="Ledger Tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        <span>Ledger</span>
+      </button>
+    </nav>
+
+    <!-- Guided Tour Dim Spotlight (Focuses on active tour element) -->
+    <div id="tour-dim-spotlight" class="tour-dim-spotlight" aria-hidden="true"></div>
+
+    <!-- Guided Tour Caption Card (Pinned strictly above tour controls & tab bar inside phone frame) -->
+    <div id="tour-caption" class="tour-caption-card" aria-live="polite"></div>
+
+    <!-- Guided Tour Controls Bar (Pinned strictly above tab bar inside phone frame) -->
+    <div id="tour-controls" role="toolbar" aria-label="Guided Tour Controls">
+      <span class="tour-step-label" id="tour-step-label">Step 1 of 13</span>
+      <div class="tour-controls-btns">
+        <button id="tour-prev-btn" aria-label="Previous step">◀ Back</button>
+        <button id="tour-pause-btn" aria-label="Pause or resume tour">⏸ Pause</button>
+        <button id="tour-next-btn" aria-label="Next step">Next ▶</button>
+        <button id="tour-skip-btn" aria-label="Exit guided tour">✕ Exit</button>
+      </div>
+    </div>
+
+    <!-- Global Toast Container (Inside phone frame) -->
+    <div id="toast-container" aria-live="polite"></div>
+  </div>
+
+  <!-- Guided Tour Simulated Cursor (Fixed layer) -->
+  <div id="guided-tour-overlay" aria-hidden="true">
+    <div id="tour-cursor" aria-hidden="true"></div>
+  </div>
+
+  <!-- PM Lens Toggle (Edge Button on Desktop) -->
+  <button id="pm-lens-toggle" aria-label="Toggle PM Lens Panel">
+    <span>PM LENS</span>
+  </button>
+
+  <!-- PM Lens Right Panel (Dark Glass Drawer) -->
+  <aside id="pm-lens" aria-label="PM Product Annotations">
+    <div class="pmlens-header">
+      <div>
+        <div class="pmlens-header__eyebrow">Flipkart APM Case Study</div>
+        <div class="pmlens-header__title">Product Manager Lens</div>
+        <div class="pmlens-header__screen" id="pmlens-header-screen">HOME SCREEN</div>
+      </div>
+      <button class="pmlens-close-btn" id="pmlens-close-btn" title="Close PM Lens (Shortcut: L)">✕</button>
+    </div>
+    
+    <div class="pmlens-body">
+      <!-- Pinned Hotspot Spotlight Mount -->
+      <div id="pmlens-spotlight" style="display:none"></div>
+
+      <!-- Live Metrics Tree -->
+      <div id="pmlens-metrics"></div>
+
+      <!-- Contextual Annotations for Current Screen -->
+      <div id="pmlens-annotations" style="display:flex;flex-direction:column;gap:var(--space-3)"></div>
+    </div>
+  </aside>
+</div>
+
+<!-- Desktop Keyboard Shortcuts Hint -->
+<div class="desktop-kbd-hint" aria-hidden="true">
+  <span><kbd>1-5</kbd> Tabs</span>
+  <span><kbd>T</kbd> Tour</span>
+  <span><kbd>L</kbd> PM Lens</span>
+</div>
+
+<!-- Classic Script Tags (strictly loaded in dependency order without ES modules) -->
+<script src="js/store.js"></script>
+<script src="js/data.js"></script>
+<script src="js/scoring.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/pmlens.js"></script>
+
+<!-- Screen modules (register on Anchor.screens) -->
+<script src="js/screens/home.js"></script>
+<script src="js/screens/pause.js"></script>
+<script src="js/screens/mirror.js"></script>
+<script src="js/screens/autonomy.js"></script>
+<script src="js/screens/ledger.js"></script>
+<script src="js/screens/agentoff.js"></script>
+
+<!-- Tour & Router -->
+<script src="js/tour.js"></script>
+<script src="js/router.js"></script>
+
+<!-- App Bootstrapper -->
+<script src="js/main.js"></script>
+
+</body>
+</html>

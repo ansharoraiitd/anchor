@@ -1,0 +1,491 @@
+/* ============================================================
+   ANCHOR — Base Styles (Futuristic Command Deck)
+   Ambient Aurora, Glowing Phone Frame, HUD Layout, Smooth Transitions
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  background: var(--bg-space);
+  color: var(--text-high);
+}
+
+body {
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  color: var(--text-high);
+  background: var(--bg-space);
+  line-height: 1.5;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Prevent whole-page scrolling on desktop viewports */
+@media (min-width: 769px) {
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+/* --- Focus visible (futuristic cyan glow) --- */
+:focus-visible {
+  outline: 2px solid var(--you-cyan);
+  outline-offset: 3px;
+  box-shadow: 0 0 12px var(--you-glow);
+  border-radius: var(--radius-xs);
+}
+
+/* --- Scrollbars (sleek dark hairline) --- */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.16); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(25, 227, 255, 0.4); }
+
+/* ============================================================
+   AMBIENT BACKGROUND (Slowly Drifting Dual-Aurora Blobs + Grid)
+   ============================================================ */
+
+.ambient-aurora {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Technical faint grid overlay */
+.ambient-aurora::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(circle at 50% 50%, black 40%, transparent 85%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 40%, transparent 85%);
+  opacity: 0.8;
+}
+
+/* Blue blob (You) */
+.aurora-blob-blue {
+  position: absolute;
+  width: 650px;
+  height: 650px;
+  border-radius: 50%;
+  top: -150px;
+  left: 20%;
+  background: radial-gradient(circle, rgba(40, 116, 240, 0.28) 0%, rgba(25, 227, 255, 0.08) 50%, transparent 75%);
+  filter: blur(90px);
+  animation: aurora-drift-blue 22s ease-in-out infinite alternate;
+}
+
+/* Violet blob (Sia) */
+.aurora-blob-violet {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  bottom: -120px;
+  right: 15%;
+  background: radial-gradient(circle, rgba(139, 92, 255, 0.24) 0%, rgba(255, 79, 216, 0.08) 50%, transparent 75%);
+  filter: blur(90px);
+  animation: aurora-drift-violet 26s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-drift-blue {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(60px, 80px) scale(1.12); }
+  100% { transform: translate(-40px, 50px) scale(0.95); }
+}
+
+@keyframes aurora-drift-violet {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(-70px, -60px) scale(1.08); }
+  100% { transform: translate(50px, -40px) scale(0.92); }
+}
+
+/* ============================================================
+   APP CONTAINER & PHONE FRAME
+   ============================================================ */
+
+#app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  max-height: 100vh;
+  max-height: 100dvh;
+  position: relative;
+  z-index: 1;
+  padding: 16px;
+  gap: var(--space-6);
+  overflow: hidden;
+}
+
+#phone-frame {
+  position: relative;
+  width: var(--phone-w);
+  height: min(844px, calc(100vh - 32px));
+  height: min(844px, calc(100dvh - 32px));
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  background: var(--bg-deck);
+  border-radius: 46px;
+  overflow: hidden;
+  box-shadow: var(--shadow-frame);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Thin inner glow border */
+#phone-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 45px;
+  border: 1px solid rgba(25, 227, 255, 0.12);
+  pointer-events: none;
+  z-index: 99;
+}
+
+/* Responsive adjustment on desktop */
+@media (min-width: 1024px) {
+  #app {
+    padding: 16px;
+  }
+}
+
+/* Responsive: Real phone viewports */
+@media (max-width: 768px) {
+  #app {
+    padding: 0;
+    align-items: stretch;
+    height: 100dvh;
+    overflow: hidden;
+  }
+  #phone-frame {
+    width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+  }
+  #phone-frame::before {
+    display: none;
+  }
+}
+
+/* Responsive: Short viewports (< 700px height) */
+@media (max-height: 700px) {
+  :root {
+    --topbar-h: 50px;
+    --tabbar-h: 56px;
+  }
+  #app {
+    padding: 8px 16px;
+  }
+  #phone-frame {
+    height: min(844px, calc(100vh - 16px));
+    height: min(844px, calc(100dvh - 16px));
+    max-height: calc(100vh - 16px);
+    max-height: calc(100dvh - 16px);
+    border-radius: 36px;
+  }
+  #phone-frame::before {
+    border-radius: 35px;
+  }
+}
+
+/* ============================================================
+   TOP BAR (Tactical HUD Header)
+   ============================================================ */
+
+#top-bar {
+  height: var(--topbar-h);
+  padding: 0 var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-surface-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 20;
+}
+
+.top-bar__logo {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--font-hud);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.12em;
+  color: var(--you-cyan);
+  text-shadow: 0 0 10px rgba(25, 227, 255, 0.4);
+}
+
+.top-bar__logo span {
+  font-family: var(--font-name);
+  color: var(--text-mid);
+  font-size: var(--text-xs);
+  letter-spacing: normal;
+  font-weight: var(--fw-normal);
+  font-style: italic;
+}
+
+.top-bar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.top-bar__btn {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-mid);
+  transition: all var(--dur-fast) var(--ease-smooth);
+}
+
+.top-bar__btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-high);
+  border-color: var(--border-mid);
+}
+
+/* ============================================================
+   SCREEN CONTAINER & TRANSITIONS
+   ============================================================ */
+
+#screen-container {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+  background: transparent;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: var(--space-6);
+  display: none;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity var(--dur-std) var(--ease-smooth),
+    transform var(--dur-std) var(--ease-smooth);
+}
+
+.screen.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Horizontal slide variants for directional tab switching */
+.screen.slide-from-right {
+  transform: translateX(20px);
+}
+.screen.slide-from-left {
+  transform: translateX(-20px);
+}
+
+/* ============================================================
+   BOTTOM TAB BAR (Sliding Glow Pill Indicator)
+   ============================================================ */
+
+#bottom-tab-bar {
+  height: var(--tabbar-h);
+  display: flex;
+  background: var(--bg-surface-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 20;
+  padding: 0 var(--space-2);
+}
+
+/* Sliding glow pill under the active tab */
+.tab-indicator-pill {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  width: calc((100% - 16px) / 5);
+  background: linear-gradient(180deg, rgba(40, 116, 240, 0.18) 0%, rgba(25, 227, 255, 0.08) 100%);
+  border: 1px solid rgba(25, 227, 255, 0.35);
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 16px rgba(25, 227, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: transform var(--dur-std) var(--ease-spring);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--text-low);
+  font-size: var(--text-2xs);
+  font-family: var(--font-hud);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.04em;
+  padding: var(--space-1) 0;
+  position: relative;
+  z-index: 2;
+  transition: color var(--dur-fast) var(--ease-smooth);
+}
+
+.tab-item svg {
+  width: 20px;
+  height: 20px;
+  transition: all var(--dur-fast) var(--ease-smooth);
+}
+
+.tab-item:hover {
+  color: var(--text-mid);
+}
+
+.tab-item.active {
+  color: var(--you-cyan);
+}
+
+.tab-item.active svg {
+  transform: translateY(-1px);
+  filter: drop-shadow(0 0 6px rgba(25, 227, 255, 0.6));
+}
+
+/* Pause badge counter */
+.tab-badge {
+  position: absolute;
+  top: 4px;
+  right: calc(50% - 16px);
+  background: var(--status-coral);
+  color: #fff;
+  font-family: var(--font-hud);
+  font-size: 10px;
+  font-weight: var(--fw-bold);
+  min-width: 16px;
+  height: 16px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  box-shadow: 0 0 8px var(--status-coral-glow);
+}
+
+/* ============================================================
+   KEYBOARD SHORTCUTS HINT (Desktop only)
+   ============================================================ */
+
+.desktop-kbd-hint {
+  position: fixed;
+  bottom: var(--space-4);
+  left: var(--space-5);
+  font-family: var(--font-hud);
+  font-size: 11px;
+  color: var(--text-low);
+  display: flex;
+  gap: var(--space-3);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.desktop-kbd-hint kbd {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 2px 5px;
+  color: var(--text-mid);
+}
+
+@media (max-width: 1024px) {
+  .desktop-kbd-hint { display: none; }
+}
+
+/* ============================================================
+   SECTION HEADERS & LABELS
+   ============================================================ */
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-4) var(--space-2);
+}
+
+.section-title {
+  font-family: var(--font-hud);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-mid);
+  font-weight: var(--fw-semibold);
+}
+
+.section-link {
+  font-family: var(--font-hud);
+  font-size: var(--text-xs);
+  color: var(--you-cyan);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: text-shadow var(--dur-fast);
+}
+
+.section-link:hover {
+  text-shadow: 0 0 8px var(--you-glow);
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .aurora-blob-blue, .aurora-blob-violet {
+    animation: none !important;
+  }
+}
