@@ -1,179 +1,121 @@
-# ANCHOR — "Your agent knows you. Anchor makes sure you still do."
+# ANCHOR
 
-> **Case Submission**: Flipkart Associate Product Manager Role (2040 Vision)  
-> **Prompt**: *"It's 2040. Everyone has a personal AI agent that knows them better than they know themselves and carries out their day-to-day tasks. Outline the ramifications and create a digital product that helps protect yourselves from it."*
+**Your agent knows you. Anchor makes sure you still do.**
 
----
+ANCHOR is a prototype for the Flipkart APM '29 case round. The prompt:
 
-## ⚡ Try This in 60 Seconds (Reviewer Quick-Flow)
+> It's 2040. Everyone has a personal AI agent that knows them better than they know themselves and carries out their day-to-day tasks. Outline the ramifications of this paradigm and create a digital product that helps protect yourselves from it.
 
-1. **Launch**: Double-click `index.html` in any web browser.
-2. **HUD Dashboard**: Notice the glowing **Drift Ring** (73 Agency Score — inside the 55–80 healthy band) and the 7-week scrubber. Hover or tap scrubber dots to inspect past weeks.
-3. **Primary Action**: Tap the central action chip: **"6 decisions need pause →"** to jump into the Pause queue.
-4. **Choose-First & Hold-to-Confirm**:
-   - Open the **₹74,999 Dell XPS laptop** card.
-   - Notice Sia's recommendation is **sealed behind a locked glowing card**.
-   - Pick **any option except "Buy now"** → watch the card unseal with a divergence reveal.
-   - Notice the **Influence Check**: Sia's unbiased confidence without Dell's 1.2% loyalty incentive was only 54%.
-   - Experience **Hold-to-Confirm**: Press and hold the approval button for 1.2s to physically register considered consent.
-5. **The Echo Index**: Tap **Mirror** (or press keyboard key `3`):
-   - Inspect the **Echo Index (60%)**: *"Part of the gap closed because you changed, not because Sia learned."*
-   - Toggle the 8-domain radar between **Overlay**, **You Say**, and **Sia Thinks**.
-6. **Autonomy & Counterfactual Simulation**: Tap **Autonomy** (key `4`):
-   - Turn the rotary knobs to inspect the 4 delegation boundaries.
-   - Tap **"Simulate Impact →"** on the Travel suggestion to see the before/after replay catching a real regret flight clash.
-7. **PM Lens Drawer**: Press **`L`** (or tap the pulsing right-edge tab) to open the live Metrics Tree, guardrails, and marketplace annotations.
+The 2-page document explains the thinking. This prototype shows the product. It is plain HTML, CSS and JavaScript. There is no build step and no network access, and it runs by double-clicking `index.html`.
 
----
+## The idea
 
-## 1. Quick Start
+The risk in 2040 is not a rogue AI. It is a helpful one. When an agent handles hundreds of tasks a week, a person slowly stops being the author of their own decisions, and nothing tells them it is happening.
 
-**Zero build step. Zero npm dependencies. Zero external fonts or network calls. Runs directly from `index.html`.**
+ANCHOR is an independent layer that sits between a person and their agent. It belongs to the user, not to the company that built the agent. It does four things:
 
-1. Navigate to the `anchor/` folder.
-2. Double-click `index.html` in Chrome, Safari, Edge, or Firefox.
-3. *Alternative (local test server)*:
-   ```bash
-   cd anchor
-   python3 -m http.server 8000
-   # Open http://localhost:8000 in your browser
-   ```
-4. **Keyboard Shortcuts**:
-   - `1` – Home (Agency Dashboard)
-   - `2` – Pause (Stakes Queue)
-   - `3` – Mirror (Divergence Lab)
-   - `4` – Autonomy (Rotary Dials)
-   - `5` – Ledger (Audit Trail)
-   - `T` – Play Guided Tour (Instant HUD Walkthrough)
-   - `L` – Toggle PM Lens Drawer
-   - `Space` – Pause / Resume active tour
-   - `← / →` – Prev / Next step in tour
-   - `Esc` – Exit tour immediately
+- It stops the agent at decisions that matter and makes the person choose first.
+- It shows when someone paid to influence the agent.
+- It measures how much of the agent's "accuracy" is the person quietly changing to match it.
+- It lets the person set how much freedom the agent gets, and test a setting before trusting it.
 
----
+Everything rolls up into one number, the **Agency Score**: how much of your important decision-making is still yours.
 
-## 2. Product Overview & Persona Context
+The demo user is Meera Iyer, 29, a product designer in Bengaluru. Her agent, Sia, handles about 340 tasks a week.
 
-By 2040, hyper-capable personal agents carry out hundreds of micro-decisions weekly. For persona **Meera Iyer** (29, product designer in Bengaluru), her agent **Sia** executes **~340 tasks per week**:
-- **280 autonomous micro-tasks** (smart grocery refills, utility bill auto-pay, calendar adjustments, commute re-routing).
-- **54 reviewed decisions** (flight bookings, hotel shortlists, subscription renewals, messaging drafts).
-- **6 high/medium-stakes pause decisions** currently pending human reflection.
+## Try it in 60 seconds
 
-### The Core Problem (Ramifications)
-1. **Preference Atrophy**: When an agent predicts every desire before you articulate it, you stop forming preferences.
-2. **Consent Degradation**: Confirming hundreds of decisions degrades into thoughtless rubber-stamping.
-3. **Agent-to-Agent Commercial Nudging**: Sellers' automated agents negotiate with personal agents, offering micro-incentives or loyalty bids that distort recommendations away from genuine user interests.
-4. **Skill Decay**: Basic human life skills (budgeting, negotiating, trip planning) atrophy without deliberate exercise.
+1. Open `index.html`. Home shows the Agency Score (73, inside the healthy range of 55 to 80).
+2. Tap the red chip, **"3 high-stakes decisions need pause"**. This opens the Pause queue.
+3. Open **Upgrade laptop: Dell XPS 14 OLED**. Sia's pick is sealed. Pick any option except "Buy now on Flipkart" and see the reveal: **Divergence recorded**. Note the Influence Check: Dell's agent offered Sia a 1.2% loyalty credit, and Sia's confidence without it is 54%.
+4. Open **Accept freelance UX gig**, pick an option, then **press and hold** the confirm bar for 1.2 seconds. A quick tap does nothing, on purpose.
+5. Go to **Mirror** (key `3`). The **Echo Index** is 60%: most of the apparent agreement is Meera drifting toward Sia.
+6. Go to **Autonomy** (key `4`). On the Travel suggestion, tap **Simulate Impact**. It replays the last 7 days under the new setting and shows a regret that would have been caught.
+7. Press `L` to open the **PM Lens**, the side panel of product notes and live metrics.
 
-### The Solution: ANCHOR
-Anchor is an **independent, user-owned software layer** positioned between Meera and Sia. It audits drift, enforces human reflection on decisions that matter, inspects commercial incentives, and measures the user's **Agency Score**.
+## The screens
 
----
+| Screen | What it does |
+|---|---|
+| **Home** | The Agency Score on a Drift Ring (blue arc: what Meera chooses; purple arc: what Sia predicts). Four sub-scores that open a "why this changed" sheet. |
+| **Pause** | A queue of decisions Sia must stop for, ranked by a Stakes Score. **Choose-First** hides Sia's pick until Meera chooses. An **Influence Check** shows any sponsor bid. High-stakes approvals need a 1.2-second hold. Approving three cards in under two seconds each triggers a "Going fast?" warning. |
+| **Mirror** | The Echo Index with eight weekly snapshots. A radar chart across eight life areas (what Meera says vs what Sia thinks). A five-question calibration quiz. Sia's stated beliefs about Meera, which she can Agree with, Disagree with, or mark "Not Anymore". |
+| **Autonomy** | Eight rotary dials from "Ask me first" to "Fully auto", with spend limits. Suggestions based on how far Sia has drifted. **Simulate Impact** replays last week's decisions under a new setting. Safety limits and a panic switch. |
+| **Ledger** | Every action Sia took, grouped by day. Filters for influence-flagged, regretted and high-stakes decisions. Expand an entry for its audit trail. |
+| **Agent-Off Day** | In the menu. A 24-hour challenge to do one thing yourself (plan a trip, negotiate a bill, choose a gift) for skill points and a streak. |
+| **PM Lens** | A panel on the right, for the product reviewer. It is not part of what a user sees. It shows the problem each screen answers, the trade-off made, live metrics, and what I chose not to build. |
 
-## 3. Visual System & Design Direction
+There is also a **Guided Tour** (the Tour button, or key `T`) that walks through the app with captions. It restores your data when it ends.
 
-The UI is built as a futuristic, dark technical **command deck for your own mind**: sleek, alive, and instantly understandable in 5 seconds.
-
-### Semantic Color Language
-- **YOU (Human Steering)**: Electric Blue to Cyan (`#2874F0` to `#19E3FF`) — Used exclusively for human agency, stated choices, and Anchor verification.
-- **SIA (Personal AI Agent)**: Violet to Magenta (`#8B5CFF` to `#FF4FD8`) — Used for AI predictions, autonomous schedules, and algorithmic hypotheses.
-- **DRIFT GAP (Misalignment)**: Amber / Gold Glow (`#FFC83D`) — Highlights the variance between what Sia predicted and what Meera actually chose.
-- **HEALTHY STATUS**: Mint (`#2EF2A0`) — Calibrated equilibrium (55–80% agency).
-- **RISK / ALERT**: Coral (`#FF5C6C`) — Flagged commercial distortion, rubber-stamping, and panic states.
-
-### Visual Architecture
-- **Ambient Aurora**: Slowly drifting dual-blob aurora (cyan and violet) with a faint 40px HUD grid behind the phone shell.
-- **Glowing Phone Frame**: 390×844 mobile frame on desktop with a glowing edge hairline and glassmorphic depth (`backdrop-filter: blur(20px)`).
-- **Tabular Monospace HUD Font**: Monospace numbers (`ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas`) for all telemetry readouts, timestamps, and scores.
-
----
-
-## 4. Key Product Innovations
-
-### 1. The Drift Ring (Home)
-Dual-arc canvas HUD gauge. The outer cyan arc represents Meera's steering; the inner violet arc represents Sia's prediction. The shaded amber gap between them visualizes drift. Surrounded by 40 radial tick marks and an interactive 7-week history scrubber.
-
-### 2. Agency Score & Healthy Band (55–80%)
-$$\text{Agency Score} = 0.30 \cdot \text{PA} + 0.25 \cdot \text{CQ} + 0.25 \cdot \text{IE} + 0.20 \cdot \text{SV}$$
-- **Healthy Band**: 55–80.
-- *Pilot Target*: Test whether keeping users in the 55–80 healthy band reduces self-reported decision regret compared to unmonitored delegation, without triggering review fatigue.
-- *Over-Review Signal*: An Agency Score >80 or manual intervention on >65% of low-stakes tasks triggers an "Over-reviewing" warning — reminding Meera that delegating routine tasks is healthy.
-
-### 3. Hold-to-Confirm (Consent with Physical Friction)
-For high-stakes decisions (e.g. ₹74,999 laptop or ₹45,000 career gig), Anchor replaces single-tap buttons with a **1.2-second Hold-to-Confirm button**. A glowing progress bar fills during the hold. If released early, it cancels and prompts deliberate focus. Low-stakes tasks remain single-tap.
-
-### 4. Choose-First Mode (Pause)
-Hides Sia's recommendation behind a **sealed, glowing card**. Meera picks first from realistic options. Upon selection, the card unseals with match/divergence animations, logging ground-truth preference data into Mirror before anchoring bias can occur.
-
-### 5. The Echo Index (Mirror)
-$$\text{Echo Index} = \frac{\text{Divergence closed by Meera moving toward Sia}}{\text{Total divergence closed}} \times 100$$
-*"Part of the gap closed because you changed, not because Sia learned."* 8 weeks of historical snapshots show whether alignment came from AI intelligence or human conformity.
-
-### 6. Rotary Delegation Dials & 7-Day Replay Simulation (Autonomy)
-Replaces generic sliders with 4-position rotary knobs (*Ask me first, Suggest & wait, Act & tell me, Fully auto*). The **"Simulate Setting"** modal replays the past 7 days of ledger items, demonstrating counterfactual proof: e.g. switching Travel to "Ask me first" prevented an unwanted Pune trip reschedule that clashed with Meera's design review.
-
-### 7. Hotspot Educational Pins
-Interactive pulsing `?` pins situated on signature mechanics (Drift Ring, Choose-First, Echo Index, Simulation). Clicking any hotspot slides open the PM Lens drawer with targeted product design annotations.
-
-### 8. Interactive Guided Tour System
-Activated via the header **"Tour"** button, the top-right menu (`...` → "Play Guided Tour"), or pressing **`T`**:
-- **Fast Activation (under 150ms)**: Starts almost instantly; lights up the phone frame with a cyan edge glow and activates the top **`● TOUR MODE`** pill with step tracking.
-- **Tab-by-Tab & Option-by-Option Educational Cards**: Explains *what each tab is*, itemizes *all options and views* available in that screen, and displays a live cue of simulated interactions.
-- **Target Spotlight Halos**: Dynamically frames focused UI elements (e.g. Drift Ring, Choose-First card, Echo Index, counterfactual simulator).
-- **Full Tactile Control**: Reviewers can pause auto-advance, step backward/forward at their own pace via `[◀ Back]`, `[⏸ Pause]`, `[Next ▶]` or keyboard arrows.
-- **Tour Mode Completed Modal**: Upon finishing, displays a 5-subsystem recap with quick actions to *Explore Freely*, *Replay Tour*, *Reset Demo Data*, or *Open PM Lens*.
-
----
-
-## 5. The Flipkart Marketplace Lens
-
-1. **Agent-to-Agent Commerce Trust**: When automated buyer agents transact with seller agents, buyers fear covert kickbacks. Anchor's **Influence Check** exposes commercial bids (e.g. Dell's 1.2% loyalty incentive dropping Sia's neutral confidence from 89% to 54%).
-2. **"Verified by Anchor" Seller Trust Badge**: Sellers whose agents do not offer predatory side-incentives gain a trust badge, leading to higher conversion and fewer dispute escalations.
-3. **Regret Returns Reduction**: By enforcing Choose-First on high-ticket Flipkart orders, Flipkart reduces impulse agent buys and costly reverse logistics.
-4. **Targeting Intelligence from Dials**: When Meera sets a category to "Suggest & wait", Flipkart knows she is in an active consideration phase and presents in-depth comparison material rather than premature 1-click checkout prompts.
-
----
-
-## 6. Architecture & File Structure
+## How the score works
 
 ```
-anchor/
-├── index.html              # Shell loading dark command-deck assets in order
-├── README.md               # Product documentation & engineering specification
-├── css/
-│   ├── tokens.css          # Semantic dark palette, typography & glow shadows
-│   ├── base.css            # Ambient aurora, phone frame & sliding tab bar
-│   ├── components.css      # Hold-to-confirm, rotary knobs & hotspot pins
-│   ├── screens.css         # Screen-specific HUD layouts & progressive disclosure
-│   └── pmlens.css          # PM Lens glass drawer & live metrics tree
-└── js/
-    ├── store.js            # Reactive localStorage store (v3 schema)
-    ├── data.js             # Realistic 2040 Bangalore seed data for Meera & Sia
-    ├── scoring.js          # Ground-truth formulas & over-review signal
-    ├── ui.js               # Shared glass bottom-sheets, HUD toasts, formatters
-    ├── charts.js           # Vanilla SVG/Canvas: Drift Ring, Radar, Echo Timeline
-    ├── pmlens.js           # Live metrics updates & hotspot spotlight controller
-    ├── tour.js             # Scripted guided walkthrough with glowing cursor trail
-    ├── router.js           # Hash routing & sliding glow pill indicator
-    ├── screens/
-    │   ├── home.js         # HUD Dashboard, orbit chips & week scrubber
-    │   ├── pause.js        # Pause queue, sealed choose-first & hold-to-confirm
-    │   ├── mirror.js       # Echo Index, 8-domain radar & calibration quiz
-    │   ├── autonomy.js     # Rotary knobs & before/after animated replay
-    │   ├── ledger.js       # Glowing spine timeline, search & regret marks
-    │   └── agentoff.js     # 24h manual mode challenge & streak progression
-    └── main.js             # Bootstrapper, keyboard shortcuts (1-5, T, L) & menu
+Agency Score = 0.30 × Preference Alignment
+             + 0.25 × Consent Quality
+             + 0.25 × Influence Exposure
+             + 0.20 × Skill Vitality
 ```
 
----
+| Input | What it measures |
+|---|---|
+| Preference Alignment | How closely Sia's predictions match Meera's own Choose-First picks, quiz answers and radar. |
+| Consent Quality | Real review vs rubber-stamping. Starts at 80. An approval under 2 seconds costs 15 points. 5 to 15 seconds adds 5. Over 15 seconds adds 10. |
+| Influence Exposure | 100 minus the share of commercially influenced decisions, weighted by stakes (high 3.0, medium 1.5, low 0.5). |
+| Skill Vitality | Decisions Meera made before seeing Sia's pick, plus Agent-Off Day tasks. |
 
-## 7. Trade-offs and Simplifications
+**Echo Index** = (divergence closed because Meera moved toward Sia) ÷ (all divergence closed) × 100.
 
-1. **Vanilla SVG/Canvas instead of Charting Libraries**:
-   - *Trade-off*: Avoided libraries (like Chart.js or D3) to maintain strict zero-dependency portability from `file://`. Radar and arc tweens are hand-crafted.
-2. **Simulated Delays & Latency**:
-   - *Trade-off*: To feel like a live cloud product, confirmation toasts and unlocks run on realistic $200\text{--}400\,\text{ms}$ transitions.
-3. **Self-Reported Agent-Off Day Verification**:
-   - *Trade-off*: Real verification would require OS-level application tracking or biometric proof. A lightweight manual checklist was chosen to avoid creating a surveillance tool inside a product built for autonomy.
-4. **Simulated Cursor in Guided Tour**:
-   - *Trade-off*: Implemented via an absolutely positioned DOM element for seamless screen recording without OS cursor jitter.
+The healthy range is **55 to 80**, not "higher is better". A score that only rewards more reviewing would reward annoying the user. A very high score is flagged as possible over-reviewing.
+
+All of this lives in `js/scoring.js`, with the reasoning in comments.
+
+## Choices I would defend
+
+- **Choose-First hides the AI's answer.** It protects the person's own judgment, but adds about 8 to 12 seconds. So it only runs on high-stakes decisions.
+- **Hold-to-confirm is friction on purpose.** A tap is how rubber-stamping happens. Low-stakes tasks stay one tap.
+- **ANCHOR must stay independent.** If a marketplace ran the checker, it would be judging its own sellers. Flipkart's role would be to adopt an open standard, for example a "Verified by Anchor" mark for sellers whose agents pass the Influence Check.
+
+## What I left out on purpose
+
+- **Social comparison** ("you have more agency than 73% of users"). It turns agency into a competition.
+- **Predictive alerts** ("your score will drop if you don't review"). They cause alert fatigue.
+- **AI-written summaries.** Review should stay human and checkable.
+
+## Limits, stated plainly
+
+- **All data is simulated.** Meera, Sia, the decisions, the scores and the weekly snapshots are seeded in `js/data.js`. Nothing here was measured on real users.
+- **The weights and thresholds are my starting hypotheses.** They would need a pilot to validate.
+- **Agent-Off Day is self-reported.** Verifying it would mean tracking the user, which is the opposite of the product's purpose.
+- **There is no real agent.** Sia's behaviour is scripted so the product's reactions are predictable.
+
+## Running it
+
+1. Unzip the folder.
+2. Double-click `index.html` in Chrome or Safari. No server is needed.
+3. Optional: `python3 -m http.server 8000` inside the folder, then open `http://localhost:8000`.
+
+Your progress is saved in the browser (`localStorage`, key `anchor_state_v3`). To start over, open the menu (⋮) and choose **Reset Demo Data**.
+
+**Keys:** `1` to `5` switch tabs, `T` starts the tour, `L` opens the PM Lens, `Esc` closes a sheet.
+
+## Folder layout
+
+```
+index.html
+css/        tokens, base, components, screens, PM Lens
+js/
+  main.js        startup and keyboard shortcuts
+  store.js       state and localStorage
+  data.js        the simulated data
+  scoring.js     all score formulas
+  router.js      tab navigation
+  charts.js      Drift Ring, radar, Echo chart (plain SVG/canvas)
+  pmlens.js      the PM Lens panel
+  tour.js        the guided tour
+  ui.js          sheets, toasts and shared helpers
+  screens/       home, pause, mirror, autonomy, ledger, agentoff
+```
+
+No libraries are used. The fonts are system fonts.
+
+Built by Ansh Arora, IIT Delhi.
